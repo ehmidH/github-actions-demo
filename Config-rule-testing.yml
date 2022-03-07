@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: ''
+Resources:
+  ConfigRule:
+    Type: 'AWS::Config::ConfigRule'
+    Properties:
+      ConfigRuleName: !Join 
+        - '-'
+        - - !Ref Team
+          - Required-tags
+      Scope:
+        TagKey: owner
+        TagValue: DevOps
+      Description: >-
+        A Config rule that checks whether our resources have pfg tags that you
+        specify.
+      InputParameters:
+        tag1Key: Ehmid-owner
+        tag2Key: Ehmid-cost-center
+      Source:
+        Owner: AWS
+        SourceIdentifier: REQUIRED_TAGS
+ Parameters:
+  Team:
+    Type: String
+    Description: Team owner
+    Default: DevOps
